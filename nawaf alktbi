@@ -1,0 +1,24 @@
+import pyudmx
+import time
+
+# إنشاء جهاز uDMX
+dmx = pyudmx.uDMXDevice()
+
+# التحكم في الإضاءة
+def move_light(channel, value):
+    dmx.set_channel(channel, value)
+
+# رقص الضوء
+try:
+    while True:
+        # تحريك الضوء في القناة 1 و 2
+        move_light(1, 255)  # أقصى سطوع
+        move_light(2, 255)  # أقصى انحراف
+        time.sleep(1)
+        move_light(1, 0)  # إيقاف السطوع
+        move_light(2, 0)  # إيقاف الانحراف
+        time.sleep(1)
+except KeyboardInterrupt:
+    dmx.close()
+python light_control.py
+
